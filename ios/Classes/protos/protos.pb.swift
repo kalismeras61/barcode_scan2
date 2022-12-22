@@ -166,6 +166,12 @@ struct AndroidConfiguration {
   /// This parameter is only supported on Android devices.
   var useAutoFocus: Bool = false
 
+  var title: String = String()
+
+  var statusbarColor: String = String()
+
+  var actionBarColor: String = String()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -261,6 +267,9 @@ extension AndroidConfiguration: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "aspectTolerance"),
     2: .same(proto: "useAutoFocus"),
+    3: .same(proto: "title"),
+    4: .same(proto: "statusbarColor"),
+    5: .same(proto: "actionBarColor"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -271,6 +280,9 @@ extension AndroidConfiguration: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularDoubleField(value: &self.aspectTolerance) }()
       case 2: try { try decoder.decodeSingularBoolField(value: &self.useAutoFocus) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.title) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.statusbarColor) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.actionBarColor) }()
       default: break
       }
     }
@@ -283,12 +295,24 @@ extension AndroidConfiguration: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if self.useAutoFocus != false {
       try visitor.visitSingularBoolField(value: self.useAutoFocus, fieldNumber: 2)
     }
+    if !self.title.isEmpty {
+      try visitor.visitSingularStringField(value: self.title, fieldNumber: 3)
+    }
+    if !self.statusbarColor.isEmpty {
+      try visitor.visitSingularStringField(value: self.statusbarColor, fieldNumber: 4)
+    }
+    if !self.actionBarColor.isEmpty {
+      try visitor.visitSingularStringField(value: self.actionBarColor, fieldNumber: 5)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: AndroidConfiguration, rhs: AndroidConfiguration) -> Bool {
     if lhs.aspectTolerance != rhs.aspectTolerance {return false}
     if lhs.useAutoFocus != rhs.useAutoFocus {return false}
+    if lhs.title != rhs.title {return false}
+    if lhs.statusbarColor != rhs.statusbarColor {return false}
+    if lhs.actionBarColor != rhs.actionBarColor {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

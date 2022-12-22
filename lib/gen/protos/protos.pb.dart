@@ -32,6 +32,9 @@ class AndroidConfiguration extends $pb.GeneratedMessage {
             ? ''
             : 'useAutoFocus',
         protoName: 'useAutoFocus')
+    ..aOS(3, 'title')
+    ..aOS(4, 'statusbarColor', protoName: 'statusbarColor')
+    ..aOS(5, 'actionBarColor', protoName: 'actionBarColor')
     ..hasRequiredFields = false;
 
   AndroidConfiguration._() : super();
@@ -99,6 +102,41 @@ class AndroidConfiguration extends $pb.GeneratedMessage {
   $core.bool hasUseAutoFocus() => $_has(1);
   @$pb.TagNumber(2)
   void clearUseAutoFocus() => clearField(2);
+  @$pb.TagNumber(3)
+  $core.String get title => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set title($core.String v) {
+    $_setString(2, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasTitle() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTitle() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get statusbarColor => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set statusbarColor($core.String v) {
+    $_setString(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasStatusbarColor() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearStatusbarColor() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get actionBarColor => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set actionBarColor($core.String v) {
+    $_setString(4, v);
+  }
+
+  @$pb.TagNumber(5)
+  $core.bool hasActionBarColor() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearActionBarColor() => clearField(5);
 }
 
 class Configuration extends $pb.GeneratedMessage {
@@ -108,21 +146,41 @@ class Configuration extends $pb.GeneratedMessage {
           : 'Configuration',
       createEmptyInstance: create)
     ..m<$core.String, $core.String>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'strings',
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'strings',
         entryClassName: 'Configuration.StringsEntry',
         keyFieldType: $pb.PbFieldType.OS,
         valueFieldType: $pb.PbFieldType.OS)
     ..pc<BarcodeFormat>(
-        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'restrictFormat', $pb.PbFieldType.PE,
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'restrictFormat',
+        $pb.PbFieldType.PE,
         protoName: 'restrictFormat',
         valueOf: BarcodeFormat.valueOf,
         enumValues: BarcodeFormat.values)
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'useCamera', $pb.PbFieldType.O3,
+    ..a<$core.int>(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'useCamera',
+        $pb.PbFieldType.O3,
         protoName: 'useCamera')
     ..aOM<AndroidConfiguration>(
-        4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'android',
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'android',
         subBuilder: AndroidConfiguration.create)
-    ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'autoEnableFlash', protoName: 'autoEnableFlash')
+    ..aOB(
+        5,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'autoEnableFlash',
+        protoName: 'autoEnableFlash')
     ..hasRequiredFields = false;
 
   Configuration._() : super();
@@ -229,19 +287,35 @@ class ScanResult extends $pb.GeneratedMessage {
           ? ''
           : 'ScanResult',
       createEmptyInstance: create)
-    ..e<ResultType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'type',
+    ..e<ResultType>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'type',
         $pb.PbFieldType.OE,
         defaultOrMaker: ResultType.Barcode,
         valueOf: ResultType.valueOf,
         enumValues: ResultType.values)
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rawContent',
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'rawContent',
         protoName: 'rawContent')
     ..e<BarcodeFormat>(
-        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'format', $pb.PbFieldType.OE,
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'format',
+        $pb.PbFieldType.OE,
         defaultOrMaker: BarcodeFormat.unknown,
         valueOf: BarcodeFormat.valueOf,
         enumValues: BarcodeFormat.values)
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'formatNote',
+    ..aOS(
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'formatNote',
         protoName: 'formatNote')
     ..hasRequiredFields = false;
 

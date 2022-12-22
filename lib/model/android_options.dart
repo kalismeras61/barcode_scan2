@@ -4,6 +4,9 @@ class AndroidOptions {
   const AndroidOptions({
     this.aspectTolerance = 0.5,
     this.useAutoFocus = true,
+    this.title = '',
+    this.statusbarColor = '#000000',
+    this.actionBarColor = '#000000',
   });
 
   /// You can optionally set aspect ratio tolerance level
@@ -14,4 +17,16 @@ class AndroidOptions {
   /// Set to true to enable auto focus
   /// This parameter is only supported on Android devices.
   final bool useAutoFocus;
+
+  /// Change the title of activities
+  /// This parameter is only supported on Android devices.
+  final String title;
+
+  /// Set statusbar color
+  /// This parameter is only supported on Android devices.
+  final String statusbarColor;
+
+  /// Set actionBar color
+  /// This parameter is only supported on Android devices.
+  final String actionBarColor;
 }

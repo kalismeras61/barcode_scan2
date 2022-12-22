@@ -3,8 +3,8 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/services.dart';
 
-import './model/model.dart';
 import 'gen/protos/protos.pb.dart' as proto;
+import 'model/model.dart';
 
 // ignore: avoid_classes_with_only_static_members
 /// Barcode scanner plugin
@@ -42,10 +42,10 @@ class BarcodeScanner {
     subscription = events.listen((dynamic event) async {
       if (event is String) {
         if (event == cameraAccessGranted) {
-          subscription.cancel();
+          await subscription.cancel();
           completer.complete(await _doScan(options));
         } else if (event == cameraAccessDenied) {
-          subscription.cancel();
+          await subscription.cancel();
           completer.completeError(PlatformException(code: event));
         }
       }
@@ -57,7 +57,7 @@ class BarcodeScanner {
     if (permissionsRequested) {
       return completer.future;
     } else {
-      subscription.cancel();
+      await subscription.cancel();
       return _doScan(options);
     }
   }
@@ -70,7 +70,10 @@ class BarcodeScanner {
       ..strings.addAll(options.strings)
       ..android = (proto.AndroidConfiguration()
         ..useAutoFocus = options.android.useAutoFocus
-        ..aspectTolerance = options.android.aspectTolerance);
+        ..aspectTolerance = options.android.aspectTolerance
+        ..title = options.android.title
+        ..statusbarColor = options.android.statusbarColor
+        ..actionBarColor = options.android.actionBarColor);
     final buffer = (await _channel.invokeMethod<List<int>>(
       'scan',
       config.writeToBuffer(),
