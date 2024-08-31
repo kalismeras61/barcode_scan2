@@ -38,14 +38,16 @@ class BarcodeScanner {
     final events = _eventChannel.receiveBroadcastStream();
     final completer = Completer<ScanResult>();
 
-    late StreamSubscription subscription;
+    late StreamSubscription<dynamic> subscription;
     subscription = events.listen((dynamic event) async {
       if (event is String) {
         if (event == cameraAccessGranted) {
-          await subscription.cancel();
+          // ignore: unawaited_futures
+          subscription.cancel();
           completer.complete(await _doScan(options));
         } else if (event == cameraAccessDenied) {
-          await subscription.cancel();
+          // ignore: unawaited_futures
+          subscription.cancel();
           completer.completeError(PlatformException(code: event));
         }
       }

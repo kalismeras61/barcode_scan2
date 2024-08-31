@@ -2,8 +2,13 @@ group 'de.mintware.barcode_scan'
 version '1.0-SNAPSHOT'
 
 buildscript {
+<<<<<<< HEAD
     ext.kotlin_version = '1.7.21'
     ext.protobuf_version = '0.8.18'
+=======
+    ext.kotlin_version = '1.8.0'
+    ext.protobuf_version = '0.9.1'
+>>>>>>> upstream/main
     ext.protocVersion = '3.11.0'
     ext.javaliteVersion = '3.11.0'
     repositories {
@@ -12,7 +17,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.4'
+        classpath 'com.android.tools.build:gradle:7.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.protobuf:protobuf-gradle-plugin:$protobuf_version"
     }
@@ -30,7 +35,20 @@ apply plugin: 'kotlin-android'
 apply plugin: 'com.google.protobuf'
 
 android {
-    compileSdkVersion 33
+    if (project.android.hasProperty("namespace")) {
+        namespace("de.mintware.barcode_scan")
+    }
+
+    compileSdkVersion 34
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -68,7 +86,7 @@ protobuf {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+    implementation 'me.dm7.barcodescanner:zxing:1.9.8'
     implementation "com.google.protobuf:protobuf-javalite:$javaliteVersion"
     api 'com.google.android.material:material:1.1.0'
 }

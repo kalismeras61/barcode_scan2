@@ -10,7 +10,7 @@ void main() => runApp(const App());
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
   @override
-  _AppState createState() => _AppState();
+  State<App> createState() => _AppState();
 }
 
 class _AppState extends State<App> {
@@ -53,11 +53,10 @@ class _AppState extends State<App> {
               icon: const Icon(Icons.camera),
               tooltip: 'Scan',
               onPressed: _scan,
-            )
+            ),
           ],
         ),
         body: ListView(
-          scrollDirection: Axis.vertical,
           shrinkWrap: true,
           children: <Widget>[
             if (scanResult != null)
@@ -147,7 +146,6 @@ class _AppState extends State<App> {
                 ),
                 subtitle: Slider(
                   min: -1,
-                  max: 1,
                   value: _aspectTolerance,
                   onChanged: (value) {
                     setState(() {
@@ -214,9 +212,11 @@ class _AppState extends State<App> {
               (format) => CheckboxListTile(
                 value: selectedFormats.contains(format),
                 onChanged: (i) {
-                  setState(() => selectedFormats.contains(format)
-                      ? selectedFormats.remove(format)
-                      : selectedFormats.add(format));
+                  setState(
+                    () => selectedFormats.contains(format)
+                        ? selectedFormats.remove(format)
+                        : selectedFormats.add(format),
+                  );
                 },
                 title: Text(format.toString()),
               ),
@@ -249,8 +249,6 @@ class _AppState extends State<App> {
     } on PlatformException catch (e) {
       setState(() {
         scanResult = ScanResult(
-          type: ResultType.Error,
-          format: BarcodeFormat.unknown,
           rawContent: e.code == BarcodeScanner.cameraAccessDenied
               ? 'The user did not grant the camera permission!'
               : 'Unknown error: $e',
